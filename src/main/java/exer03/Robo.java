@@ -59,8 +59,9 @@ public class Robo {
      * @param a área de exploração
      */
     public void alterarArea(int a){
-        int lado = (int)Math.sqrt(a);
-        area = (Math.pow(lado,2) == a && a >= 4) ? a : (area > 0 ? area : 4);
+        int l = (int)Math.sqrt(a);
+        area = (Math.pow(l,2) == a && a >= 4) ? a : (area > 0 ? area : 4);
+        alterarCoordXY(coordX,coordY);
     }
 
     /**
@@ -70,9 +71,9 @@ public class Robo {
      * @param y coordenada y.
      */
     public void alterarCoordXY(int x,int y){
-        int lado = (int)Math.sqrt(area);
-        coordX = (x >= 0 && x <= lado) ? x : (coordX > 0 ? coordX : 0);
-        coordY = (y >= 0 && y <= lado) ? y : (coordY > 0 ? coordY : 0);
+        int l = (int)Math.sqrt(area);
+        coordX = (x >= 0 && x <= l) ? x : (coordX <= l ? coordX : 0);
+        coordY = (y >= 0 && y <= l) ? y : (coordY <= l ? coordY : 0);
 
     }
 
@@ -133,13 +134,14 @@ public class Robo {
     }
 
     /**
-     * Método privado que faz o Robô mover uma unidade para frente.
+     * Método privado que faz o Robô mover uma unidade para frente que ele estiver apontando.
      */
     private void mover(){
+        int l = (int)Math.sqrt(area);
         switch(frente){
-            case 'N' : if((coordY + 1) <= area/2){coordY++;}
+            case 'N' : if((coordY + 1) <= l){coordY++;}
                 break;
-            case 'L' : if((coordX + 1) <= area/2){coordX++;}
+            case 'L' : if((coordX + 1) <= l){coordX++;}
                 break;
             case 'S' : if((coordY - 1) >= 0){coordY--;}
                 break;
